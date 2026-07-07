@@ -1,16 +1,16 @@
 import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button } from 'primereact/button';
 
 function LinkButton({ to, children, className }: { to: string; children: ReactNode; className?: string }) {
   const navigate = useNavigate();
   return (
-    <Button
-      className={className}
+    <button
+      type="button"
+      className={`${className} w-full block`}
       onClick={() => navigate(to)}
     >
       {children}
-    </Button>
+    </button>
   );
 }
 
