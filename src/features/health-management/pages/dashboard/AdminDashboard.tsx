@@ -11,13 +11,13 @@ export default function AdminDashboard() {
   const outOfStock = mockMedicalStock.filter(s => s.quantity === 0).length
 
   const kpis = [
-    { value: mockMemberships.length, label: 'Total Memberships', color: 'bg-blue-500', icon: 'pi-users' },
+    { value: mockMemberships.length, label: 'Total Memberships', color: 'bg-blue-500', icon: 'pi-id-card' },
     { value: mockHealthRecords.length, label: 'Health Records', color: 'bg-purple-500', icon: 'pi-file' },
     { value: mockAppointments.length, label: 'Appointments', color: 'bg-pink-500', icon: 'pi-calendar' },
     { value: mockDoctors.length, label: 'Doctors', color: 'bg-indigo-500', icon: 'pi-user' },
     { value: mockMedicalStock.length, label: 'Stock Items', color: 'bg-yellow-500', icon: 'pi-box' },
     { value: lowStock, label: 'Low Stock', color: 'bg-orange-500', icon: 'pi-exclamation-triangle' },
-    { value: outOfStock, label: 'Out of Stock', color: 'bg-red-500', icon: 'pi-times-circle' },
+    { value: outOfStock, label: 'Out of Stock', color: 'bg-red-500', icon: 'pi-box' },
     { value: mockMemberships.length, label: 'Active Memberships', color: 'bg-green-500', icon: 'pi-check-circle' },
   ]
 

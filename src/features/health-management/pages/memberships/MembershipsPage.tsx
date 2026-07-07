@@ -1,10 +1,12 @@
-import { FormPage, FormCard } from '@/shared/new-components';
+import { useState } from 'react';
+import { FormPage, FormCard, Modal, StatusBadge } from '@/shared/new-components';
 import { LinkButton } from '@/shared/components/buttons';
 import { mockMemberships } from '@/features/health-management/data';
-import { StatusBadge } from '@/shared/new-components';
 import { CardGrid } from '@/shared/cards';
 
 export default function MembershipsPage() {
+  const [selectedMember, setSelectedMember] = useState<any>(null);
+
   return (
     <FormPage
       title="Memberships"
@@ -58,7 +60,10 @@ export default function MembershipsPage() {
                   <i className="pi pi-users text-slate-400" />
                   <span>{item.dependents} Dep.</span>
                 </div>
-                <button className="p-2 text-slate-400 hover:text-green-600 hover:bg-green-50 rounded-lg transition-colors shrink-0">
+                <button 
+                  onClick={() => setSelectedMember(item)}
+                  className="p-2 text-slate-400 hover:text-green-600 hover:bg-green-50 rounded-lg transition-colors shrink-0"
+                >
                   <i className="pi pi-chevron-right text-sm" />
                 </button>
               </div>
@@ -66,6 +71,55 @@ export default function MembershipsPage() {
           )}
         />
       </FormCard>
+
+      <Modal 
+        isOpen={!!selectedMember} 
+        onClose={() => setSelectedMember(null)}
+        title="Membership Details"
+      >
+        {selectedMember && (
+          <div className="space-y-4">
+            <div className="flex items-center gap-4 border-b border-slate-100 pb-4">
+              <div className="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center shrink-0">
+                <i className="pi pi-user text-green-600 text-xl" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-slate-800">{selectedMember.memberName}</h3>
+                <p className="text-sm text-slate-500">{selectedMember.memberId}</p>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <p className="text-xs text-slate-500 font-medium">Plan Type</p>
+                <p className="text-sm font-semibold text-slate-800">{selectedMember.membershipTypeId}</p>
+              </div>
+              <div>
+                <p className="text-xs text-slate-500 font-medium">Member Type</p>
+                <p className="text-sm font-semibold text-slate-800">{selectedMember.memberType}</p>
+              </div>
+              <div>
+                <p className="text-xs text-slate-500 font-medium">Health Center</p>
+                <p className="text-sm font-semibold text-slate-800">{selectedMember.healthCenter}</p>
+              </div>
+              <div>
+                <p className="text-xs text-slate-500 font-medium">Dependents</p>
+                <p className="text-sm font-semibold text-slate-800">{selectedMember.dependents}</p>
+              </div>
+              <div>
+                <p className="text-xs text-slate-500 font-medium">Valid From</p>
+                <p className="text-sm font-semibold text-slate-800">{selectedMember.validFrom}</p>
+              </div>
+              <div>
+                <p className="text-xs text-slate-500 font-medium">Valid Till</p>
+                <div className="text-sm font-semibold text-slate-800">
+                  {selectedMember.validTill === 'Lifetime' ? <StatusBadge variant="approved" label="Lifetime" /> : selectedMember.validTill}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </Modal>
     </FormPage>
   );
 }
