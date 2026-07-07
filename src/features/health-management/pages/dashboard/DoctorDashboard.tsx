@@ -11,12 +11,6 @@ export default function DoctorDashboard() {
     { value: mockAppointments.filter(a => a.status === 'Completed').length, label: 'Consultations Completed', color: 'bg-amber-500', icon: 'pi-check-circle' },
   ]
 
-  const statusVariant: Record<string, 'approved' | 'pending' | 'rejected'> = {
-    Scheduled: 'pending',
-    Completed: 'approved',
-    Cancelled: 'rejected',
-  }
-
   const appointmentData = [
     { day: 'Mon', count: 5 },
     { day: 'Tue', count: 8 },

@@ -29,7 +29,7 @@ export default function AdminDashboard() {
 
   // Chart Data Preparation
   const stockChartData = mockMedicalStock.slice(0, 5).map(s => ({
-    name: s.itemName,
+    name: s.saltName,
     quantity: s.quantity
   }))
 

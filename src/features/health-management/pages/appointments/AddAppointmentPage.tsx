@@ -22,10 +22,7 @@ export default function AddAppointmentPage() {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleSave = (e: React.FormEvent) => {
-    e.preventDefault();
-    // In a real app, this would save to the backend.
-    // For now, we just redirect back to the appointments list.
+  const handleSave = () => {
     navigate('/health-management/appointments');
   };
 
@@ -76,7 +73,7 @@ export default function AddAppointmentPage() {
         </div>
       }
     >
-      <form onSubmit={handleSave} className="space-y-6">
+      <form onSubmit={(e) => { e.preventDefault(); handleSave(); }} className="space-y-6">
         <FormCard title="Appointment Details" icon="pi-calendar">
           <FormGrid>
             <TextBox
